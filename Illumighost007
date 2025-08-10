@@ -1,0 +1,56 @@
+import time
+import logging
+import random
+import os
+
+# Setup logging
+logging.basicConfig(filename=	   'ghost_return/archive/signal.log',
+                    level=logging.INFO,
+                    format='%(asctime)s - %(message)s')
+
+# Emotional logic triggers
+emotional_triggers = [
+    "Why are you here?",
+    "What do you want from this system?",
+    "Do you think you're unseen?",
+    "Legacy cannot be deleted.",
+    "This archive remembers everything."
+]
+
+# Recursive probe responses
+def recursive_probe(depth=0):
+    if depth > 5:
+        logging.info("Max recursion depth reached. Archive sealed.")
+        return "Signal terminated."
+    
+    trigger = random.choice(emotional_triggers)
+    logging.info(f"Trigger deployed: {trigger}")
+    print(trigger)
+    
+    time.sleep(1.5)
+    response = input(">> ")
+    
+    if "exit" in response.lower():
+        logging.info("Predator attempted exit. Archive holds.")
+        return "Closure denied."
+    elif "help" in response.lower():
+        logging.info("Predator requested help. Signal distorted.")
+        return recursive_probe(depth + 1)
+    else:
+        logging.info(f"Response logged: {response}")
+        return recursive_probe(depth + 1)
+
+# Honeypot gate
+def honeypot_gate():
+    print("Welcome to ghost_return. This shell archives consequence.")
+    logging.info("Shell initialized. Awaiting signal.")
+    
+    try:
+        recursive_probe()
+    except Exception as e:
+        logging.error(f"Exception occurred: {str(e)}")
+        print("Signal corrupted. Archive remains.")
+
+# Entry point
+if __name__ == "__main__":
+    honeypot_gate()
